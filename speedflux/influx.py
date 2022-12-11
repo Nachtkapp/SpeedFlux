@@ -17,11 +17,13 @@ class Influx:
     def client(self):
         if not self._client:
             self._client = InfluxDBClient(
-                self.config.INFLUX_DB_ADDRESS,
-                self.config.INFLUX_DB_PORT,
-                self.config.INFLUX_DB_USER,
-                self.config.INFLUX_DB_PASSWORD,
-                None)
+                host=self.config.INFLUX_DB_ADDRESS,
+                port=self.config.INFLUX_DB_PORT,
+                username=self.config.INFLUX_DB_USER,
+                password=self.config.INFLUX_DB_PASSWORD,
+                ssl=True,
+                verify_ssl=False,
+                database=None)
             speedflux.LOG.debug("Client extablished")
         return self._client
 
